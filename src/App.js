@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Button, Container, Tabs, Tab, Modal } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OpenAI from "openai";
+import { mouseflow} from 'react-mouseflow';
 
 const PARAMS = {
   temperature: 0.9,
@@ -36,6 +37,10 @@ function App() {
   const [assistantResponses, setAssistantResponses] = useState([]);
   const [userReactions, setUserReactions] = useState([]);
   const [assistantPreviousResponse, setAssistantPreviousResponse] = useState('');
+
+    useEffect(() => {
+    mouseflow.initialize('bd124fc3-3566-466f-b860-ca8b373de41f'); // Replace 'YOUR_MFID_HERE' with your actual Mouseflow project ID (mfid)
+  }, []);
 
   const getInstructions = (qt, input) => {
     let prompt;
