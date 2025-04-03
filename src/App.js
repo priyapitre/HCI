@@ -9,8 +9,6 @@ const PARAMS = {
   max_tokens: 2048,
 }
 
-REACT_APP_OPENAI_KEY='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'
-
 const openai = new OpenAI({
   apiKey: process.env.REACT_APP_OPENAI_KEY,
   dangerouslyAllowBrowser: true
