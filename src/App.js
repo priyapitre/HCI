@@ -14,7 +14,7 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true
 });
 
-console.log("API Key:", process.env.REACT_APP_OPENAI_KEY);
+console.log("API Key New:", process.env.REACT_APP_OPENAI_KEY);
 
 function App() {
   const [questionType, setQuestionType] = useState('argumentation');
