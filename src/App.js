@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Button, Container, Tabs, Tab, Modal } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OpenAI from "openai";
+const client = new OpenAI();
 
 
 const PARAMS = {
@@ -64,28 +65,23 @@ function App() {
   const handleSendHighlightedText = async () => {
     const prompt = `Here is a highlighted text by me: ${highlightedText}. If it's one word, provide its definition. If it's more than that, use your knowledge to give context about that to me. Be under 200 words.`;
 
-    try {
-      const endpoint = "https://api.openai.com/v1/chat/completions";
-      const body = {
-        model: "gpt-3.5-turbo-0613",
-        messages: [{ role: "user", content: prompt }],
-        ...PARAMS,
-      };
+   try {
+      const response = await client.responses.create({
+        model: "gpt-4o",
+        input: [
+            {
+                role: "user",
+                content: prompt,
+            },
+        ],
+    });
 
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_KEY}`
-        },
-        body: JSON.stringify(body)
-      });
+      console.log(response.output_text);
+      // const data = await response.json();
+      // const aiResponse = data.choices[0].message.content.trim();
 
-      const data = await response.json();
-      const aiResponse = data.choices[0].message.content.trim();
-
-      setHighlightedResponse(aiResponse);
-      setHighlightModalOpen(false);
+      // setHighlightedResponse(aiResponse);
+      // setHighlightModalOpen(false);
     } catch (error) {
       console.error("Error:", error);
     }
