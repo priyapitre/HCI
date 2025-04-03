@@ -72,10 +72,6 @@ function App() {
         model: "gpt-4o",
         input: [
             {
-                role: "developer",
-                content: prompt, 
-            },
-            {
                 role: "user",
                 content: prompt,
             },
